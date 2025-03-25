@@ -17,20 +17,25 @@ export const AuthProvider = ({ children }) => {
     // define states
     const [user, setUser] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     // Function to handle login
     const handleLogin = async (username, password) => {
         try {
+            setLoading(true);
             const response = await login(username, password);
             const { access_token: token, data: userData } = response;
 
             setToken(token);
             setUser(userData);
             setIsAuthenticated(true);
+
+            return true
         } catch (err) {
             setError(err.message);
+
+            return false
         } finally {
             setLoading(false);
         }
@@ -39,14 +44,19 @@ export const AuthProvider = ({ children }) => {
     // Function to handle registration
     const handleRegister = async (username, password) => {
         try {
+            setLoading(true);
             const response = await register(username, password);
             const { access_token: token, data: userData } = response;
 
             setToken(token);
             setUser(userData);
             setIsAuthenticated(true);
+
+            return true
         } catch (err) {
             setError(err.message);
+
+            return false
         } finally {
             setLoading(false);
         }
