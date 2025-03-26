@@ -32,9 +32,20 @@ export default function DashboardPage() {
         fetchDecks();
     }, []);
 
-    const LoadingSpinner = () => (
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-    );
+    // Function to handle deck deletion
+    const handleDeleteDeck = async (deckId) => {
+        try {
+            await api.delete(`/decks/${deckId}`);
+            setDecks((prevDecks) =>
+                prevDecks.filter((deck) => deck.id !== deckId)
+            );
+        } catch (error) {
+            setError(error);
+            throw new Error(
+                "Failed to delete deck: " + error.response.data.message
+            );
+        }
+    };
 
     return (
         <div className="min-h-svh flex flex-col w-full">
@@ -51,13 +62,17 @@ export default function DashboardPage() {
                                 decks.map((deck) => (
                                     <DeckCard
                                         key={deck.id}
+                                        id={deck.id}
                                         name={deck.name}
                                         description={deck.description}
+                                        onDelete={handleDeleteDeck}
                                     />
                                 ))}
                             {loading && (
                                 <div className="flex items-center justify-center h-full">
-                                    <LoadingSpinner />
+                                    <p className="text-gray-500">
+                                        Loading decks...
+                                    </p>
                                 </div>
                             )}
                             {error && (
