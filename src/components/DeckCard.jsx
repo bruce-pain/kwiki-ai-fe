@@ -14,7 +14,7 @@ import {
     CardTitle,
     CardDescription,
     CardHeader,
-    CardFooter,
+    // CardFooter,
 } from "./ui/card";
 import { Button } from "./ui/button";
 import { Trash2 } from "lucide-react";
