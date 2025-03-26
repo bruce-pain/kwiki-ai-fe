@@ -17,8 +17,36 @@ export const AuthProvider = ({ children }) => {
     // define states
     const [user, setUser] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true); // Add initial loading state
     const [error, setError] = useState(null);
+
+    // Add initialization effect
+    useEffect(() => {
+        const initializeAuth = async () => {
+            try {
+                const token = getToken();
+                if (token && !isTokenExpired()) {
+                    // Token exists and is valid
+                    const response = await getUserProfile();
+                    setUser(response.data);
+                    setIsAuthenticated(true);
+                } else {
+                    // Token doesn't exist or is expired
+                    removeToken();
+                    setUser(null);
+                    setIsAuthenticated(false);
+                }
+            } catch (err) {
+                setError(err.message);
+                setIsAuthenticated(false);
+                removeToken();
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        initializeAuth();
+    }, []);
 
     // Function to handle login
     const handleLogin = async (username, password) => {
@@ -78,6 +106,11 @@ export const AuthProvider = ({ children }) => {
         handleRegister,
         handleLogout,
     };
+
+    // Don't render children until initial auth check is complete
+    if (loading) {
+        return null; // Or return a loading spinner
+    }
 
     return (
         <AuthContext.Provider value={value}>
