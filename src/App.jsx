@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import { ThemeProvider } from "./context/ThemeProvider";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import LoginPage from "./pages/LoginPage";
@@ -9,22 +10,27 @@ import DashboardPage from "./pages/DashboardPage";
 export default function App() {
     return (
         <AuthProvider>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Navigate to="/dashboard" />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<RegisterPage />} />
-
-                    {/* Protected Routes */}
-                    <Route element={<ProtectedRoute />}>
-                        {/* Add your protected routes here */}
+            <ThemeProvider>
+                <BrowserRouter>
+                    <Routes>
                         <Route
-                            path="/dashboard"
-                            element={<DashboardPage />}
+                            path="/"
+                            element={<Navigate to="/dashboard" />}
                         />
-                    </Route>
-                </Routes>
-            </BrowserRouter>
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/register" element={<RegisterPage />} />
+
+                        {/* Protected Routes */}
+                        <Route element={<ProtectedRoute />}>
+                            {/* Add your protected routes here */}
+                            <Route
+                                path="/dashboard"
+                                element={<DashboardPage />}
+                            />
+                        </Route>
+                    </Routes>
+                </BrowserRouter>
+            </ThemeProvider>
         </AuthProvider>
     );
 }
