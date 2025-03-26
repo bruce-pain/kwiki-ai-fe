@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -16,11 +17,13 @@ import { Label } from "@/components/ui/label";
 export default function RegisterPage() {
     const { register, handleSubmit } = useForm();
     const { handleRegister, loading, error } = useAuth();
+    const [errorMessage, setErrorMessage] = useState(null);
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         if (data.password !== data.confirmPassword) {
-            return; // You might want to show an error message here
+            setErrorMessage("Passwords do not match");
+            return;
         }
         const success = await handleRegister(data.username, data.password);
         if (success) {
@@ -85,9 +88,9 @@ export default function RegisterPage() {
                                             ? "Registering..."
                                             : "Register"}
                                     </Button>
-                                    {error && (
+                                    {(error || errorMessage) && (
                                         <p className="text-sm text-red-500 text-center">
-                                            {error}
+                                            {error || errorMessage}
                                         </p>
                                     )}
                                 </div>
