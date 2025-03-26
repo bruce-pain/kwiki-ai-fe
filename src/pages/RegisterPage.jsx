@@ -23,9 +23,9 @@ export default function RegisterPage() {
             return; // You might want to show an error message here
         }
         const success = await handleRegister(data.username, data.password);
-        // if (success) {
-        //     navigate("/dashboard");
-        // }
+        if (success) {
+            navigate("/dashboard");
+        }
     };
 
     return (

@@ -20,9 +20,9 @@ export default function LoginPage() {
 
     const onSubmit = async (data) => {
         const success = await handleLogin(data.username, data.password);
-        // if (success) {
-        //     navigate("/dashboard");
-        // }
+        if (success) {
+            navigate("/dashboard");
+        }
     };
 
     return (
