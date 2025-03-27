@@ -1,9 +1,8 @@
 import DeckCard from "@/components/DeckCard";
 import Navbar from "@/components/Navbar";
-import api from "@/services/api";
+import CreateDeck from "@/components/CreateDeck";
 
-import { Button } from "@/components/ui/button";
-import { LucidePlus } from "lucide-react";
+import api from "@/services/api";
 import { useEffect, useState } from "react";
 
 export default function DashboardPage() {
@@ -59,9 +58,7 @@ export default function DashboardPage() {
                 <div className="max-w-4xl mx-auto">
                     <div className="flex items-center justify-between">
                         <h1 className="text-2xl font-bold">Your Decks</h1>
-                        <Button>
-                            <LucidePlus /> Create Deck
-                        </Button>
+                        <CreateDeck />
                     </div>
                     <div className="mt-6">
                         {/* <h2 className="text-xl font-semibold">Your Decks</h2> */}
