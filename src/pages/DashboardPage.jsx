@@ -49,6 +49,11 @@ export default function DashboardPage() {
         }
     };
 
+    // Function to handle adding a new deck to list of decks
+    const handleAddDeck = (deck) => {
+        setDecks((prevDecks) => [...prevDecks, deck]);
+    };
+
     return (
         <div className="min-h-svh flex flex-col w-full">
             {/* Navbar */}
@@ -58,7 +63,7 @@ export default function DashboardPage() {
                 <div className="max-w-4xl mx-auto">
                     <div className="flex items-center justify-between">
                         <h1 className="text-2xl font-bold">Your Decks</h1>
-                        <CreateDeck />
+                        <CreateDeck onAddDeck={handleAddDeck}/>
                     </div>
                     <div className="mt-6">
                         {/* <h2 className="text-xl font-semibold">Your Decks</h2> */}
