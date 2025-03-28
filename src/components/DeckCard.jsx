@@ -19,9 +19,18 @@ import {
 import { Button } from "./ui/button";
 import { Trash2 } from "lucide-react";
 
+import { useNavigate } from "react-router-dom";
+
 export default function DeckCard({ id, name, description, onDelete }) {
+
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(`/deck/${id}`);
+    }
+
     return (
-        <Card className="w-full max-w-sm">
+        <Card className="w-full max-w-sm" onClick={handleClick}>
             <CardHeader>
                 <div className="flex justify-between items-start">
                     <div>
