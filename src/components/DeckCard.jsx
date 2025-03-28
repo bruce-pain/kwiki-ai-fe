@@ -29,6 +29,16 @@ export default function DeckCard({ id, name, description, onDelete }) {
         navigate(`/deck/${id}`);
     }
 
+    const handleDeleteClick = (e) => {
+        // Prevent the click event from bubbling up to the Card
+        e.stopPropagation();
+    }
+
+    const handleConfirmDelete = (e) => {
+        e.stopPropagation();
+        onDelete(id);
+    }
+
     return (
         <Card className="w-full max-w-sm" onClick={handleClick}>
             <CardHeader>
@@ -39,7 +49,11 @@ export default function DeckCard({ id, name, description, onDelete }) {
                     </div>
                     <AlertDialog>
                         <AlertDialogTrigger asChild>
-                            <Button variant="ghost" size="icon">
+                            <Button 
+                                variant="ghost" 
+                                size="icon" 
+                                onClick={handleDeleteClick}
+                            >
                                 <Trash2 className="h-4 w-4 text-destructive" />
                             </Button>
                         </AlertDialogTrigger>
@@ -53,7 +67,7 @@ export default function DeckCard({ id, name, description, onDelete }) {
                             <AlertDialogFooter>
                                 <AlertDialogCancel>Cancel</AlertDialogCancel>
                                 <AlertDialogAction 
-                                    onClick={() => onDelete(id)}
+                                    onClick={handleConfirmDelete}
                                     className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                                 >
                                     Delete

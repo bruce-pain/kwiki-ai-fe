@@ -52,7 +52,7 @@ export default function DeckPreviewPage() {
                         >
                             Back to Dashboard
                         </Button>
-                        <h1 className="text-2xl font-bold">{deck?.name}</h1>
+                        <h1 className="text-2xl font-bold">Previewing {deck?.name}</h1>
                         <p className="text-gray-500">{deck?.description}</p>
                     </div>
                     <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
