@@ -57,9 +57,9 @@ export default function DeckPreviewPage() {
                     </div>
                     <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {deck?.cards?.length > 0 ? (
-                            deck.cards.map((card) => (
+                            deck.cards.map((card, id) => (
                                 <Card
-                                    key={card.id}
+                                    key={id}
                                     className="mb-4 p-4 shadow-md"
                                 >
                                     <h2 className="text-lg font-semibold">
