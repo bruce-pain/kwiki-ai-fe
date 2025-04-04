@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
+import DeckDeleteDialogButton from "@/components/DeckDeleteDialogButton";
 
 import api from "@/services/api";
 
@@ -37,6 +38,19 @@ export default function DeckPreviewPage() {
         fetchDeck();
     }, [deckId]);
 
+    // Function to handle deck deletion
+    const handleDeleteDeck = async (deckId) => {
+        try {
+            await api.delete(`/decks/${deckId}`);
+            navigate("/dashboard");
+        } catch (error) {
+            setError(error);
+            throw new Error(
+                "Failed to delete deck: " + error.response.data.message
+            );
+        }
+    };
+
     return (
         <div className="min-h-svh flex flex-col w-full">
             {/* Navbar */}
@@ -52,16 +66,26 @@ export default function DeckPreviewPage() {
                         >
                             Back to Dashboard
                         </Button>
-                        <h1 className="text-2xl font-bold">Previewing {deck?.name}</h1>
+                        <h1 className="text-2xl font-bold">
+                            Previewing {deck?.name}
+                        </h1>
                         <p className="text-gray-500">{deck?.description}</p>
+                        <DeckDeleteDialogButton
+                            id={deck?.id}
+                            name={deck?.name}
+                            onDelete={handleDeleteDeck}
+                        />
                     </div>
                     <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {error && (
+                            <div className="text-red-500 p-4">
+                                {error.response?.data?.message ||
+                                    "An error occurred"}
+                            </div>
+                        )}
                         {deck?.cards?.length > 0 ? (
                             deck.cards.map((card, id) => (
-                                <Card
-                                    key={id}
-                                    className="mb-4 p-4 shadow-md"
-                                >
+                                <Card key={id} className="mb-4 p-4 shadow-md">
                                     <h2 className="text-lg font-semibold">
                                         {card.question}
                                     </h2>

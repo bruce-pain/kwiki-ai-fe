@@ -34,21 +34,6 @@ export default function DashboardPage() {
         fetchDecks();
     }, []);
 
-    // Function to handle deck deletion
-    const handleDeleteDeck = async (deckId) => {
-        try {
-            await api.delete(`/decks/${deckId}`);
-            setDecks((prevDecks) =>
-                prevDecks.filter((deck) => deck.id !== deckId)
-            );
-        } catch (error) {
-            setError(error);
-            throw new Error(
-                "Failed to delete deck: " + error.response.data.message
-            );
-        }
-    };
-
     // Function to handle adding a new deck to list of decks
     const handleAddDeck = (deck) => {
         setDecks((prevDecks) => [...prevDecks, deck]);
@@ -75,7 +60,6 @@ export default function DashboardPage() {
                                         id={deck.id}
                                         name={deck.name}
                                         description={deck.description}
-                                        onDelete={handleDeleteDeck}
                                     />
                                 ))}
                             {loading && (
