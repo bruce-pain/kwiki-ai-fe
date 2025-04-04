@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import DeckPreviewPage from "./pages/DeckPreviewPage";
+import StudyPage from "./pages/StudyPage";
 
 export default function App() {
     return (
@@ -31,6 +32,10 @@ export default function App() {
                             <Route
                                 path="/deck/:deckId"
                                 element={<DeckPreviewPage />}
+                            />
+                            <Route
+                                path="/deck/:deckId/study"
+                                element={<StudyPage />}
                             />
                         </Route>
                     </Routes>

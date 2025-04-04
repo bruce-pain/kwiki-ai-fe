@@ -58,7 +58,7 @@ export default function DeckPreviewPage() {
             {/* Main content */}
             <div className="flex flex-col items-center justify-center w-full p-6 md:p-10">
                 <div className="max-w-4xl mx-auto">
-                    <div className="flex flex-col gap-4 p-6">
+                    <div className="flex flex-col gap-4 p-6 text-center">
                         <Button
                             variant="outline"
                             onClick={() => navigate("/dashboard")}
@@ -70,29 +70,37 @@ export default function DeckPreviewPage() {
                             Previewing {deck?.name}
                         </h1>
                         <p className="text-gray-500">{deck?.description}</p>
-                        <DeckDeleteDialogButton
-                            id={deck?.id}
-                            name={deck?.name}
-                            onDelete={handleDeleteDeck}
-                        />
+                        <div className="flex gap-4 mt-4 justify-center">
+                            <Button
+                                variant="outline"
+                                onClick={() => navigate(`/deck/${deckId}/study`)}
+                            >
+                                Start Studying
+                            </Button>
+                            <DeckDeleteDialogButton
+                                id={deck?.id}
+                                name={deck?.name}
+                                onDelete={handleDeleteDeck}
+                            />
+                        </div>  
                     </div>
                     <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {error && (
-                            <div className="text-red-500 p-4">
+                            <div className="text-red-500 p-4 text-center">
                                 {error.response?.data?.message ||
                                     "An error occurred"}
                             </div>
                         )}
                         {deck?.cards?.length > 0 ? (
                             deck.cards.map((card, id) => (
-                                <Card key={id} className="mb-4 p-4 shadow-md">
+                                <Card key={id} className="mb-4 p-4 shadow-md text-center">
                                     <h2 className="text-lg font-semibold">
                                         {card.question}
                                     </h2>
                                 </Card>
                             ))
                         ) : (
-                            <p>No cards available in this deck.</p>
+                            <p className="text-center">No cards available in this deck.</p>
                         )}
                     </div>
                 </div>
