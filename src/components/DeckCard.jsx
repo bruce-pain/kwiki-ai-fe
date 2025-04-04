@@ -17,7 +17,7 @@ export default function DeckCard({ id, name, description }) {
     }
 
     return (
-        <Card className="w-full max-w-sm" onClick={handleClick}>
+        <Card className="w-full max-w-sm cursor-pointer hover:shadow-md transition-shadow" onClick={handleClick}>
             <CardHeader>
                 <div className="flex justify-between items-start">
                     <div>

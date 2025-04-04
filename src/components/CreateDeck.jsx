@@ -27,8 +27,6 @@ export default function CreateDeck({ onAddDeck }) {
 
     const onSubmit = async (data) => {
         // Handle the form submission here
-        console.log("Form submitted with data:", topic);
-
         try {
             setLoading(true);
             setError(null);
