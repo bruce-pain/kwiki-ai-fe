@@ -31,3 +31,28 @@ export const getUserProfile = async () => {
         );
     }
 };
+
+export const initiateGoogleLogin = async () => {
+    try {
+        const response = await api.get("/auth/google");
+        return response.data;
+    } catch (error) {
+        throw new Error(
+            "Google login initiation failed: " + error.response.data.message
+        );
+    }
+}
+
+export const handleGoogleCallback = async (code, state, error = null) => {
+    try {
+        const url = error 
+            ? `/auth/google/callback?code=${code}&state=${state}&error=${error}`
+            : `/auth/google/callback?code=${code}&state=${state}`;
+        const response = await api.get(url);
+        return response.data;
+    } catch (error) {
+        throw new Error(
+            "Google login callback failed: " + error.response.data.message
+        );
+    }
+}
