@@ -3,6 +3,8 @@ import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+import { initiateGoogleLogin } from "@/services/authService";
+
 import { GalleryVerticalEnd } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
