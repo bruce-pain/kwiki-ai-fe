@@ -33,5 +33,5 @@ export const getUserProfile = async () => {
 };
 
 export const initiateGoogleLogin = async () => {
-    window.location.href = `${process.env.VITE_API_URL}/auth/google`;
-}
+    window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`;
+};
