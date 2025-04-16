@@ -5,6 +5,7 @@ import { ThemeProvider } from "./context/ThemeProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import GoogleCallbackPage from "./pages/GoogleCallback";
 import DashboardPage from "./pages/DashboardPage";
 import DeckPreviewPage from "./pages/DeckPreviewPage";
 import StudyPage from "./pages/StudyPage";
@@ -21,6 +22,10 @@ export default function App() {
                         />
                         <Route path="/login" element={<LoginPage />} />
                         <Route path="/register" element={<RegisterPage />} />
+                        <Route
+                            path="/google/callback"
+                            element={<GoogleCallbackPage />}
+                        />
 
                         {/* Protected Routes */}
                         <Route element={<ProtectedRoute />}>

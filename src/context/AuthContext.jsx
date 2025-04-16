@@ -59,11 +59,29 @@ export const AuthProvider = ({ children }) => {
             setUser(userData);
             setIsAuthenticated(true);
 
-            return true
+            return true;
         } catch (err) {
             setError(err.message);
 
-            return false
+            return false;
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleGoogleLogin = async (token) => {
+        try {
+            setToken(token);
+            setLoading(true);
+            const response = await getUserProfile();
+            const { data: userData } = response;
+            setUser(userData);
+            setIsAuthenticated(true);
+            return true;
+        } catch (err) {
+            setError(err.message);
+
+            return false;
         } finally {
             setLoading(false);
         }
@@ -80,11 +98,11 @@ export const AuthProvider = ({ children }) => {
             setUser(userData);
             setIsAuthenticated(true);
 
-            return true
+            return true;
         } catch (err) {
             setError(err.message);
 
-            return false
+            return false;
         } finally {
             setLoading(false);
         }
@@ -105,6 +123,7 @@ export const AuthProvider = ({ children }) => {
         handleLogin,
         handleRegister,
         handleLogout,
+        handleGoogleLogin,
     };
 
     // Don't render children until initial auth check is complete
@@ -113,9 +132,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={value}>
-            {children}
-        </AuthContext.Provider>
+        <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
     );
 };
 
