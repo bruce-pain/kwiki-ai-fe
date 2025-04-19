@@ -16,7 +16,7 @@ Kwiki AI is a web application for generating and studying AI-powered flashcard d
 - [React](https://react.dev/)
 - [Vite](https://vitejs.dev/)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [Radix UI](https://www.radix-ui.com/) (for accessible UI primitives)
+- [shadcn/ui](https://ui.shadcn.com/) (for accessible UI components)
 - [Lucide Icons](https://lucide.dev/)
 - [Axios](https://axios-http.com/) (API requests)
 - [React Hook Form](https://react-hook-form.com/) (forms)
